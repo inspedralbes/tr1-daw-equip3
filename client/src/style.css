@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
+
+body {
+    background-color: #36086b;
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+}
+
+.login-card h1 {
+  font-family: 'Press Start 2P';  
+  font-size: 64px;
+  font-weight: 900;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.login-form input {
+  display: block;
+}
+
+.login-form button {
+  display: block;
+  margin: 0 auto;
+}
