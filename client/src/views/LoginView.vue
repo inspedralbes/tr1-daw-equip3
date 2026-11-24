@@ -21,6 +21,7 @@ function enter() {
     <main class="login-page">
         <section class="login-card">
             <h1>Arcadia</h1>
+            <h2>Play, connect, repeat</h2>
             <div class="login-form">
                 <label for="username">Nom d'usuari</label>
                 <input
