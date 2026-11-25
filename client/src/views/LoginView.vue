@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/userStore'
 
@@ -8,9 +8,26 @@ const userStore = useUserStore()
 
 const username = ref('')
 
-// Lista de personajes de ejemplo (puedes cambiarlos por rutas a tus imágenes)
-const characters = ['👾', '🤖', '👽', '👻', '🕹️']
+const characters = ['char-1', 'char-2']
 const currentcharacterIndex = ref(0)
+
+const characterImages = import.meta.glob(
+    '../assets/sprites/characters/*/*.png',
+    { eager: true, import: 'default' }
+)
+
+function getCharacterPreview(charName) {
+    const basePath = `../assets/sprites/characters/${charName}`
+    return (
+        characterImages[`${basePath}/cover.png`] ||
+        ''
+    )
+}
+
+const currentCharacterName = computed(() => characters[currentcharacterIndex.value])
+const currentCharacterImage = computed(() =>
+    getCharacterPreview(currentCharacterName.value)
+)
 
 function prevcharacter() {
   currentcharacterIndex.value =
@@ -28,6 +45,10 @@ function enter() {
 
     router.push('/lobbies')
 }
+
+console.log('keys:', Object.keys(characterImages))
+console.log('target:', `../assets/sprites/characters/${currentCharacterName.value}/cover.png`)
+console.log('value:', currentCharacterImage.value)
 </script>
 
 <template>
@@ -56,8 +77,13 @@ function enter() {
           <div class="character-selector">
             <button type="button" class="arrow-btn" @click="prevcharacter">&lt;</button>
             <div class="character-box">
-              <!-- Si usas imágenes reales, cambia el span por: <img :src="characters[currentcharacterIndex]" alt="character" /> -->
-              <span class="character-placeholder">{{ characters[currentcharacterIndex] }}</span>
+              <img
+                v-if="currentCharacterImage"
+                :src="currentCharacterImage"
+                :alt="currentCharacterName"
+                class="character-img"
+              />
+              <span v-else class="character-placeholder">{{  }}</span>
             </div>
             <button type="button" class="arrow-btn" @click="nextcharacter">&gt;</button>
           </div>
