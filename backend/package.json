@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js"
   },
-  "dependencies": {    
-    "express": "^5.1.0"
-  },
-  "devDependencies": {}
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.4"
+  }
 }

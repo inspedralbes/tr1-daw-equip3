@@ -2,9 +2,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/userStore'
+import { useSocketStore } from '../stores/socketStore'
+
 
 const router = useRouter()
 const userStore = useUserStore()
+const socketStore = useSocketStore()
 
 const username = ref('')
 
@@ -12,6 +15,7 @@ function enter() {
     if (!username.value.trim()) return
 
     userStore.setUsername(username.value.trim())
+    socketStore.join(username.value.trim())
 
     router.push('/avatar')
 }
