@@ -42,6 +42,19 @@ io.on('connection', (socket) => {
         sendUsers();
     });
 
+    socket.on('mensaje', (texto) => {
+        const user = users[socket.id];
+        if (!user || !user.sala) return; // tiene que estar en una sala
+        if (typeof texto !== 'string' || texto.trim() === '') return;
+        if (texto.length > 200) return; // mensajes no muy largos
+
+        // enviar el mensaje solo a los de su sala
+        io.to(user.sala).emit('mensaje', {
+            nombre: user.name,
+            texto: texto.trim()
+        });
+    });
+
     socket.on('disconnect', () => {
         delete users[socket.id];
         sendUsers();

@@ -10,6 +10,13 @@ function entrar() {
     if (nombre.value.trim() === '') return
     socketStore.join(nombre.value.trim())
 }
+
+const texto = ref('')
+
+function enviar() {
+    socketStore.enviarMensaje(texto.value)
+    texto.value = '' // vaciar el campo después de enviar
+}
 </script>
 
 <template>
@@ -30,5 +37,16 @@ function entrar() {
                 {{ user.name }} - {{ user.sala || 'sin sala' }}
             </li>
         </ul>
+
+        <div v-if="socketStore.sala">
+            <h2>Chat de {{ socketStore.sala }}</h2>
+            <ul>
+                <li v-for="(msg, i) in socketStore.mensajes" :key="i">
+                    <b>{{ msg.nombre }}:</b> {{ msg.texto }}
+                </li>
+            </ul>
+            <input v-model="texto" placeholder="Escribe un mensaje" maxlength="200" @keyup.enter="enviar" />
+            <button @click="enviar">Enviar</button>
+        </div>
     </main>
 </template>
