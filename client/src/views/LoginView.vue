@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/userStore'
+import BrandHeader from '../components/BrandHeader.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -54,11 +55,7 @@ console.log('value:', currentCharacterImage.value)
 <template>
   <main class="login-page">
     <section class="login-card">
-      <header class="login-header">
-        <h1>Arcadia</h1>
-        <h2>Play, connect, repeat.</h2>
-      </header>
-
+        <BrandHeader />
       <div class="form-columns">
         <div class="column-left">
           <label for="username">Nom</label>

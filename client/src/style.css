@@ -34,19 +34,6 @@ body {
   text-align: center;
 }
 
-.login-card h1 {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 64px;
-  font-weight: 900;
-  margin-bottom: 16px;
-}
-
-.login-card h2 {
-  font-size: 18px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.75);
-}
-
 .form-columns {
   display: flex;
   justify-content: space-between;
