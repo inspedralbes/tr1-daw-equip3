@@ -15,7 +15,7 @@
 
 **Arcadia** és una plataforma social virtual inspirada en les sales recreatives arcade, on els usuaris poden explorar un món pixelat, interactuar amb altres persones i compartir experiències a través del joc.
 
-Cada usuari disposa d'un avatar que pot moure lliurement pel mapa en temps real, explorar diferents zones i trobar-se amb altres jugadors. La interacció entre usuaris permet iniciar converses, compartir comunicació audiovisual i participar en activitats conjuntes.
+Cada usuari disposa d'un character que pot moure lliurement pel mapa en temps real, explorar diferents zones i trobar-se amb altres jugadors. La interacció entre usuaris permet iniciar converses, compartir comunicació audiovisual i participar en activitats conjuntes.
 
 El món virtual compta amb diferents espais i elements interactius, com ara màquines recreatives i zones socials, que permeten accedir a minijocs i experiències compartides.
 
