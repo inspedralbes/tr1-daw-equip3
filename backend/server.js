@@ -12,7 +12,8 @@ const io = new Server(server, {
 const users = {};
 
 function sendUsers() {
-    io.emit('users', Object.entries(users).map(([id, name]) => ({ id, name })));
+    const lista = Object.entries(users).map(([id, u]) => ({ id, name: u.name, sala: u.sala }));
+    io.emit('users', lista);
 }
 
 io.on('connection', (socket) => {
@@ -20,7 +21,24 @@ io.on('connection', (socket) => {
 
     socket.on('join', (name) => {
         if (typeof name !== 'string' || name.trim() === '') return;
-        users[socket.id] = name.trim();
+        users[socket.id] = { name: name.trim(), sala: null };
+        sendUsers();
+    });
+
+    socket.on('joinSala', (sala) => {
+        const user = users[socket.id];
+        if (!user) return;
+        if (typeof sala !== 'string' || sala === '') return;
+        if (user.sala === sala) return; // ya está en esa sala
+
+        // salir de la sala anterior
+        if (user.sala) {
+            socket.leave(user.sala);
+        }
+
+        socket.join(sala);
+        user.sala = sala;
+        console.log(user.name + ' ha entrado en ' + sala);
         sendUsers();
     });
 
