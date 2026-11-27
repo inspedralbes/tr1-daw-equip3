@@ -4,10 +4,11 @@
   "description": "Backend de Pixel Plaza",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
-  "dependencies": {    
-    "express": "^5.1.0"
-  },
-  "devDependencies": {}
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.4"
+  }
 }
