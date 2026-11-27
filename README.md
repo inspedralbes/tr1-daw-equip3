@@ -41,7 +41,7 @@ El disseny i la planificació visual de la plataforma es poden consultar al prot
 
 ## 🚀 URL de producció
 
-Pendent de desplegament.
+🔗 [https://arcadia.daw.inspedralbes.cat](https://arcadia.daw.inspedralbes.cat)
 
 ---
 
@@ -52,3 +52,54 @@ Pendent de desplegament.
 Actualment, el projecte es troba en fase de planificació i disseny. S'estan definint les funcionalitats principals, l'estructura del món virtual, les interaccions entre usuaris i el disseny de la interfície.
 
 Les següents fases consistiran en el desenvolupament de la plataforma, la implementació de la comunicació en temps real, les interaccions del mapa i els minijocs, així com les proves i el desplegament final.
+
+---
+
+## ⚙️ Com executar el projecte
+
+Només cal tenir **Docker** instal·lat. No cal fer `npm install` ni entrar a cap carpeta.
+
+### Desenvolupament (canvis en calent)
+
+```bash
+docker compose -f docker-compose.dev.yaml up
+```
+
+- Client (Vue): [http://localhost:5173](http://localhost:5173)
+- Backend (Socket.IO): port `3000`
+
+Quan guardes un fitxer, el client s'actualitza sol al navegador i el backend es reinicia automàticament (`node --watch`). Per aturar-ho: `Ctrl + C`.
+
+### Producció
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+Els contenidors només escolten a `127.0.0.1`. Al servidor, un Nginx fa de proxy invers amb HTTPS: envia `/` al client i `/socket.io/` al backend.
+
+---
+
+## 🔑 Variables d'entorn
+
+El fitxer `.env` **no es puja al repositori**. Cal crear-lo a partir de `.env.example`.
+
+**`.env`** (arrel del projecte, el fa servir Docker Compose):
+
+| Variable | Exemple | Descripció |
+|---|---|---|
+| `FRONT_PORT` | `8080` | Port del servidor on s'exposa el client (només a `127.0.0.1`) |
+| `BACK_PORT` | `3000` | Port del servidor on s'exposa el backend (només a `127.0.0.1`) |
+
+**`client/.env`** (només per executar el client sense Docker, amb `npm run dev`):
+
+| Variable | Exemple | Descripció |
+|---|---|---|
+| `VITE_SOCKET_URL` | `http://localhost:3000` | URL del backend. A producció no es posa i es connecta al mateix domini |
+
+---
+
+## 📡 Protocol de comunicació
+
+La documentació del protocol (esdeveniments de Socket.IO) es troba a la carpeta [`doc/`](doc/README.md).
